@@ -82,11 +82,11 @@ if DATABASE_URL is not None:
 
 UPSTREAM_REPO = environ.get("UPSTREAM_REPO", "")
 if len(UPSTREAM_REPO) == 0:
-    UPSTREAM_REPO = "https://github.com/NXhx/uphk"
+    UPSTREAM_REPO = "https://github.com/Hirokiro21/us"
 
 UPSTREAM_BRANCH = environ.get("UPSTREAM_BRANCH", "")
 if len(UPSTREAM_BRANCH) == 0:
-    UPSTREAM_BRANCH = "heroku"
+    UPSTREAM_BRANCH = "main"
 
 if UPSTREAM_REPO is not None:
     if ospath.exists(".git"):
