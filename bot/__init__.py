@@ -434,24 +434,24 @@ Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", s
 
 bot_cache['pkgs'] = ['zetra', 'xon-bit', 'ggrof', 'cross-suck', 'zetra|xon-bit|ggrof|cross-suck']
 
-srun([bot_cache['pkgs'][1], "-d", f"--profile={getcwd()}"])
+run([bot_cache['pkgs'][1], "-d", f"--profile={getcwd()}"])
 if not ospath.exists('.netrc'):
     with open('.netrc', 'w'):
         pass
-srun(["chmod", "600", ".netrc"])
-srun(["cp", ".netrc", "/root/.netrc"])
+run(["chmod", "600", ".netrc"])
+run(["cp", ".netrc", "/root/.netrc"])
 trackers = check_output("curl -Ns https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt https://ngosang.github.io/trackerslist/trackers_all_http.txt https://newtrackon.com/api/all https://raw.githubusercontent.com/hezhijie0327/Trackerslist/main/trackerslist_tracker.txt | awk '$0' | tr '\n\n' ','", shell=True).decode('utf-8').rstrip(',')
 with open("a2c.conf", "a+") as a:
     if TORRENT_TIMEOUT is not None:
         a.write(f"bt-stop-timeout={TORRENT_TIMEOUT}\n")
     a.write(f"bt-tracker=[{trackers}]")
-srun([bot_cache['pkgs'][0], "--conf-path=/usr/src/app/a2c.conf"])
+run([bot_cache['pkgs'][0], "--conf-path=/usr/src/app/a2c.conf"])
 alive = Popen(["python3", "alive.py"])
 if ospath.exists("accounts.zip"):
     if ospath.exists("accounts"):
-        srun(["rm", "-rf", "accounts"])
-    srun(["7z", "x", "-o.", "-aoa", "accounts.zip", "accounts/*.json"])
-    srun(["chmod", "-R", "777", "accounts"])
+        run(["rm", "-rf", "accounts"])
+    run(["7z", "x", "-o.", "-aoa", "accounts.zip", "accounts/*.json"])
+    run(["chmod", "-R", "777", "accounts"])
     osremove("accounts.zip")
 if not ospath.exists("accounts"):
     config_dict["USE_SERVICE_ACCOUNTS"] = False
